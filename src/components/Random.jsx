@@ -34,12 +34,12 @@ const Random = () => {
   }
 
   return (
-    <div className="w-[45rem] rounded-md border border-black flex flex-col items-center bg-green-400 h-[20rem] mt-5 p-1">
+    <div className="w-[45rem] h-[24rem] rounded-md border border-black flex flex-col items-center bg-green-400 mt-5 p-1">
       <h3 className="font-bold underline">A Random Gif</h3>
       
-      <div className="h-[15rem] flex justify-center items-center">
+      <div className="h-[18rem] flex justify-center items-center">
         {
-          loader ? ( < Spinner />) : (<img src={gifs} className="h-[15rem]"/>)
+          loader ? ( < Spinner />) : (<img src={gifs} className="h-[18rem]"/>)
         }
       </div>
 

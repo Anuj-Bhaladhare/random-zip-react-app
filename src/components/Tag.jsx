@@ -33,17 +33,20 @@ const Tag = () => {
   }
 
   return (
-    <div>
-      <h2>Search Random Gifs</h2>
-      <div>
-        {loader ? (<Spinner />) : (<img src={gifs} alt="Random Gif" />)}
+    <div className="h-[24rem] bg-blue-400 mt-10 flex justify-center items-center gap-2 border border-black rounded-md p-1 flex-col">
+      <h2 className="font-bold underline">Search Random Gifs</h2>
+      <div className="h-[18rem] flex justify-center items-center">
+        {loader ? (<Spinner />) : (<img src={gifs} className="h-[18rem]" alt="Random Gif" />)}
       </div>
-      <input
-        type="text"
-        onChange={(event) => setTag(event.target.value)}
-        value={tag}
-      />
-      <button onClick={searchHandler}>Search</button>
+      <div className="flex gap-5">
+        <input 
+          type="text"
+          onChange={(event) => setTag(event.target.value)}
+          value={tag}
+          className="H-[1.2rem] w-[20rem] p-2 rounded-md border border-black"
+        />
+        <button className="bg-green-400 text-white font-bold p-1 pl-3 pr-3 rounded-md" onClick={searchHandler}>Search</button>
+      </div>
     </div>
   )
 }
