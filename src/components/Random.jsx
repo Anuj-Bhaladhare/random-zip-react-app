@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 const Random = () => {
 
@@ -8,16 +9,19 @@ const Random = () => {
   const url = "https://api.giphy.com/v1/gifs/random";
 
   const[gifs, getGifs] = useState();
+  const[loader, setLoader] = useState(false);
 
   const fetchData = async() => {
+    setLoader(true);
     try{
-      let getData = await fetch(`${url}?api_key=${API_KEY}`);
-      let outpute = await getData.json();
-      console.log(outpute);
+      const getData = await fetch(`${url}?api_key=${API_KEY}`);
+      const {data} = await getData.json();
+      getGifs(data.images.downsized.url);
     }
     catch(err) {
        console.log(err);
     }
+    setLoader(false)
   }
 
   useEffect(() => {
@@ -26,16 +30,20 @@ const Random = () => {
 
 
   const randomGifsHandaler = () => {
-      
+    fetchData();
   }
 
   return (
     <div className="w-[45rem] rounded-md border border-black flex flex-col items-center bg-green-400 h-[20rem] mt-5 p-1">
       <h3 className="font-bold underline">A Random Gif</h3>
+      
+      <div className="h-[15rem] flex justify-center items-center">
+        {
+          loader ? ( < Spinner />) : (<img src={gifs} className="h-[15rem]"/>)
+        }
+      </div>
 
-      <img src={gifs}/>
-
-      <button onClick={randomGifsHandaler} className="bg-white font-bold rounded-md p-1 pl-[15rem] pr-[15rem] opacity-50">
+      <button onClick={randomGifsHandaler} className="bg-white font-bold rounded-md p-1 pl-[15rem] pr-[15rem] mt-2 opacity-50">
         Generate
       </button>
     </div>
